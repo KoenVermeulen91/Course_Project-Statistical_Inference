@@ -1,0 +1,112 @@
+---
+title: 'Peer-graded Assignment: Statistical Inference Course Project Part II'
+subtitle: "Basic Inferential Data Analysis"
+author: "Koen Vermeulen"
+date: "10-8-2019"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+## Overview
+
+This report will analyze tooth growth.  
+
+## Analysis
+
+Loading and exploring data:
+
+```{r, echo = TRUE, results="asis"}
+data("ToothGrowth")
+dim(ToothGrowth)
+str(ToothGrowth)
+```
+
+Basic summary:
+
+```{r, echo = TRUE}
+summary(ToothGrowth)
+```
+
+Subsetting vitamin C & orange juice:
+
+```{r, echo=TRUE}
+VC <- dplyr::filter(ToothGrowth, supp == "VC")
+OJ <- dplyr::filter(ToothGrowth, supp == "OJ")
+t.test(VC$len, OJ$len, paired = FALSE, var.equal = FALSE)$conf
+t.test(VC$len, OJ$len, paired = FALSE, var.equal = FALSE)$p.value
+```
+
+The interval contains zero, but the p-value is above 5% so it is not conclusive.
+
+The next step is comparing the different doses. The hypothesis is that the dose has an effect on the tooth length.
+
+```{r, results="asis"}
+dose05 <- ToothGrowth$len[ToothGrowth$dose == 0.5]
+dose1 <-  ToothGrowth$len[ToothGrowth$dose == 1.0]
+dose2 <-  ToothGrowth$len[ToothGrowth$dose == 2.0]
+t.test(dose05, dose1)$conf
+t.test(dose05, dose1)$p.value
+t.test(dose05, dose2)$conf
+t.test(dose05, dose2)$p.value
+t.test(dose1, dose2)$conf
+t.test(dose1, dose2)$p.value
+```
+
+As we can see from all 3 t.tests, the p-values are less than 0.05. Therefore we can accept the hypothesis that the dose has an effect on tooth length, in other words: the mean is not equal to zero. We also see that all of the 95% confidence intervals are below zero. This confirms that increasing the dose increases the tooth length.
+
+In the third step we'll inspect the difference in mean lengths between the vitamin C (VC) group and orange juice (OJ) group for each dose level applied.
+
+```{r}
+dose05VC <- VC$len[VC$dose == 0.5]
+dose1VC <- VC$len[VC$dose == 1.0]
+dose2VC <- VC$len[VC$dose == 2.0]
+dose05OJ <- OJ$len[OJ$dose == 0.5]
+dose1OJ <- OJ$len[OJ$dose == 1.0]
+dose2OJ <- OJ$len[OJ$dose == 2.0]
+```
+
+As in previous cases, we'll assume that observations are not paired and that variances are not equal.
+
+```{r, results="asis"}
+t.test(dose05VC, dose05OJ)$p.value
+t.test(dose05VC, dose05OJ)$conf
+t.test(dose1VC, dose1OJ)$p.value
+t.test(dose1VC, dose1OJ)$conf
+t.test(dose2VC, dose2OJ)$p.value
+t.test(dose2VC, dose2OJ)$conf
+```
+
+We can see from the t-tests that the difference between group means for VC and OJ is statistically  significant for dose levels 0.5 and 1 mg/day, because the p-values are less than 0.05. The dose of 2 mg/day has a large p-value and the confidence interval includes zero, therefore there is no significant difference.
+
+## Conclusions
+The assumptions:
+
+1. Samples used are random iid samples. 
+
+2. Each sample is indeendent of one another, in other words, they are not paired.
+
+3. The population distribution of each samle must be approximately normal or mound shaped and roughly symetric.
+
+Conclusions:
+
+
+**4. State your conclusions and the assumptions needed for your conclusions.**
+**Assumptions:**
+1. Samples used are random iid samples. 
+2. Each sample is indeendent of one another, in other words, they are not paired.
+3. The population distribution of each samle must be approximately normal or mound shaped and roughly symetric.
+**Conclusions:**
+1. Supplement type alone does not affect the mean value of length of odontoblasts (cells responsible for
+toothgrowth).
+2. Dose level alone, without consideraton of supplement type affects tooth growth significantly. Increasing the dosage will induce better tooth growth.
+3. Orange Juice as a supplement, when used in dose levels of 0.5 mg/day and 1mg/day promotes better tooth
+growth than ascorbic acid. When applied in dose level of 2 mg/day, it has an effect on tooth growth similar 
+to that of an ascorbic acid.
+
+The result of comparing all the doses is that their p-values are very low and the confidence intervals do not contain zero, so we can deny the hypothesis and conclude that the dose does affect the tooth length.
+
+##Conclusion
+In conclusion I have analysed the tooth growth data and confirmed that an increase if the dose of the supplement increases the tooth growth. It is inconclusive whether the type of supplement, vitamin C or orange juice, affects the tooth  The assumptions needed for these coclusions is that the guinea pigs were randonmly selected from a population of guinea pigs. v
