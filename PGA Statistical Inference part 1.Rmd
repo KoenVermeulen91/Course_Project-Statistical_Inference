@@ -1,5 +1,5 @@
 ---
-title: 'Peer-graded Assignment: Statistical Inference Course Project'
+title: 'Peer-graded Assignment: Statistical Inference Course Project Part I'
 subtitle: "Investigating and comparing the Central Limit Theorem and the exponential distribution in R"
 author: "Koen Vermeulen"
 date: "9-8-2019"
