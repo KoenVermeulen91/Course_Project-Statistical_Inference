@@ -92,21 +92,4 @@ The assumptions:
 
 Conclusions:
 
-
-**4. State your conclusions and the assumptions needed for your conclusions.**
-**Assumptions:**
-1. Samples used are random iid samples. 
-2. Each sample is indeendent of one another, in other words, they are not paired.
-3. The population distribution of each samle must be approximately normal or mound shaped and roughly symetric.
-**Conclusions:**
-1. Supplement type alone does not affect the mean value of length of odontoblasts (cells responsible for
-toothgrowth).
-2. Dose level alone, without consideraton of supplement type affects tooth growth significantly. Increasing the dosage will induce better tooth growth.
-3. Orange Juice as a supplement, when used in dose levels of 0.5 mg/day and 1mg/day promotes better tooth
-growth than ascorbic acid. When applied in dose level of 2 mg/day, it has an effect on tooth growth similar 
-to that of an ascorbic acid.
-
-The result of comparing all the doses is that their p-values are very low and the confidence intervals do not contain zero, so we can deny the hypothesis and conclude that the dose does affect the tooth length.
-
-##Conclusion
-In conclusion I have analysed the tooth growth data and confirmed that an increase if the dose of the supplement increases the tooth growth. It is inconclusive whether the type of supplement, vitamin C or orange juice, affects the tooth  The assumptions needed for these coclusions is that the guinea pigs were randonmly selected from a population of guinea pigs. v
+Supplement type alone has no effect on the growth of teeth, the dosage does (significantly). Increasing the dosage will increase the growth of teeth. These conclusions are based on the low p-values and confidence levels not containing zero.
